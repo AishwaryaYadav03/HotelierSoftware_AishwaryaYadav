@@ -1,0 +1,83 @@
+<div class="container py-4">
+    <div class="card shadow-sm mb-4 border border-light-subtle">
+        <div class="card-header bg-light d-flex justify-content-between align-items-center fw-bold">
+            <span>Create Seating Section</span>
+            <div class="d-flex gap-2">
+                <button class="btn btn-primary btn-sm" routerLink="/show-seating">
+                    <i class="bi bi-eye"></i> Show Details
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="seatingForm" (ngSubmit)="onSubmit()">
+
+                <!-- Section Name -->
+                <div class="mb-3 row align-items-center">
+                    <label class="col-sm-3 col-form-label">Section Name <span class="text-danger">*</span></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" formControlName="seatingSectionName"
+                            placeholder="Section Name">
+                        <div class="text-danger small"
+                            *ngIf="seatingForm.get('seatingSectionName')?.touched && seatingForm.get('seatingSectionName')?.invalid">
+                            <span *ngIf="seatingForm.get('seatingSectionName')?.errors?.['required']">Section name is
+                                required.</span>
+                            <span *ngIf="seatingForm.get('seatingSectionName')?.errors?.['pattern']">Only letters are
+                                allowed.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disc % -->
+                <div class="mb-3 row align-items-center">
+                    <label class="col-sm-3 col-form-label">Disc % <span class="text-danger">*</span></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" formControlName="discPerc" placeholder="Disc %">
+                        <div class="text-danger small"
+                            *ngIf="seatingForm.get('discPerc')?.touched && seatingForm.get('discPerc')?.invalid">
+                            <span *ngIf="seatingForm.get('discPerc')?.errors?.['required']">Disc % is required.</span>
+                            <span *ngIf="seatingForm.get('discPerc')?.errors?.['pattern']">Only numbers are
+                                allowed.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disc EndDate -->
+                <div class="mb-3 row align-items-center">
+                    <label class="col-sm-3 col-form-label">Disc EndDate <span class="text-danger">*</span></label>
+                    <div class="col-sm-9">
+                        <input type="datetime-local" class="form-control" formControlName="discEndDate">
+                        <div class="text-danger small"
+                            *ngIf="seatingForm.get('discEndDate')?.touched && seatingForm.get('discEndDate')?.invalid">
+                            Disc EndDate is required.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Incentive Allow -->
+                <div class="mb-3 row align-items-center">
+                    <label class="col-sm-3 col-form-label">Incentive Allow <span class="text-danger">*</span></label>
+                    <div class="col-sm-9">
+                        <select class="form-select" formControlName="allowIncentive">
+                            <option value="">Select Incentive</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <div class="text-danger small"
+                            *ngIf="seatingForm.get('allowIncentive')?.touched && seatingForm.get('allowIncentive')?.invalid">
+                            Incentive selection is required.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Buttons -->
+                <div class="mt-4 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary me-2" [disabled]="seatingForm.invalid">
+                        {{ editMode ? 'UPDATE' : 'SAVE' }}
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="resetForm()">CANCEL</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
